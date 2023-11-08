@@ -1,0 +1,80 @@
+{
+    "template": {
+      "context": "/_source.message",
+      "rows": [
+        {
+          "schemaName": "clientInformation",
+          "viewName": "clientInfoView",
+          "columns": [
+            {
+              "name": "Timestamp",
+              "scalarType": "string",
+              "val": "../_source.timestamp",
+              "nullable": true
+            },
+            {
+              "name": "softwareName",
+              "scalarType": "string",
+              "val": "clientInformation/softwareName",
+              "nullable": true
+            },
+            {
+              "name": "softwareVersion",
+              "scalarType": "string",
+              "val": "clientInformation/softwareVersion",
+              "nullable": true
+            },
+            {
+              "name": "clientId",
+              "scalarType": "string",
+              "val": "requestHeader/clientId",
+              "nullable": true
+            },
+            {
+              "name": "clientAddress",
+              "scalarType": "string",
+              "val": "clientAddress",
+              "nullable": true
+            },
+            {
+              "name": "requestApiKeyName",
+              "scalarType": "string",
+              "val": "requestHeader/requestApiKeyName",
+              "nullable": true
+            },
+            {
+              "name": "topics",
+              "scalarType": "string",
+              "val": "fn:string-join(request/topics/name, ', ')",
+              "nullable": true
+            },
+            {
+              "name": "organizationId",
+              "scalarType": "string",
+              "val": "principal/organizationId",
+              "nullable": true
+            },
+            {
+              "name": "environmentId",
+              "scalarType": "string",
+              "val": "principal/environmentId",
+              "nullable": true
+            },
+            {
+              "name": "clusterId",
+              "scalarType": "string",
+              "val": "../_source.clusterId",
+              "nullable": true
+            },
+            {
+              "name": "userResourceIdKey",
+              "scalarType": "string",
+              "val": "principal/userResourceIdKey",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    }
+  }
+  

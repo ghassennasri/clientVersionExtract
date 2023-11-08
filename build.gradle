@@ -1,0 +1,58 @@
+plugins{
+    id 'com.palantir.docker-run' version '0.35.0'
+    id 'com.marklogic.ml-gradle' version '4.6.0'
+}
+
+// Define repositories for dependencies
+repositories {
+    jcenter()
+    mavenCentral()
+ maven { url "https://developer.marklogic.com/maven2/" }
+}
+
+// Define dependencies for MLCP
+configurations {
+    mlcp
+}
+
+dependencies {
+    mlcp "com.marklogic:mlcp:11.0.3" // Use the MLCP version compatible with MarkLogic 11
+    mlcp files("lib")
+}
+
+dockerRun {
+    name 'marklogic-container'
+    image 'marklogicdb/marklogic-db:latest'
+    ports '8000:8000', '8001:8001', '8002:8002','8003:8003'
+    daemonize true
+    env 'MARKLOGIC_INIT': 'true', 'MARKLOGIC_ADMIN_USERNAME': 'admin', 'MARKLOGIC_ADMIN_PASSWORD': 'admin'
+    clean true // Automatically remove the container when it stops
+}
+
+
+// Task to import data using MLCP
+task importData(type: com.marklogic.gradle.task.MlcpTask) {
+    classpath = configurations.mlcp
+    command = 'IMPORT'
+    database = 'Documents' // change to your database name if different
+    host = "localhost" // or your Docker container's IP if not using localhost
+    port = 8000
+    username = "admin"
+    password = "admin"
+    input_file_path = project.hasProperty('filePath') ? project.filePath : "data.csv"
+    input_file_type = "delimited_text"
+    delimiter = ","
+    document_type = "json"
+    delimited_root_name = "logEntry"
+    generate_uri = true
+
+    logOutputUri = "/mlcp-log.txt"
+
+    transform_module = "/marklogic.rest.transform/logContentTransform/assets/transform.sjs" // The path to the deployed transform module
+   
+    transform_function = "transform" // The exported function name in your SJS module
+
+
+    // Add other necessary MLCP options here
+}
+
