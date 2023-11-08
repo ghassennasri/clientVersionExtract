@@ -44,6 +44,19 @@ Run the script by providing the path to the OpenSearch CSV report. Optionally, y
 ```bash
 ./start.sh <path_to_csv_report> [<optional_sql_query>]
 ```
+Examples:
+
+```bash
+#select All columns
+./start.sh On_demand_report_2023-11-08T10_09_39.098Z_ed5567a0-7e1e-11ee-94b9-ff90b7753c4f.csv 
+```
+
+```bash
+#select specific columns
+./start.sh On_demand_report_2023-11-08T10_09_39.098Z_ed5567a0-7e1e-11ee-94b9-ff90b7753c4f.csv "select distinct userResourceIdKey, clientId, softwareName, softwareVersion from clientInformation.clientInfoView;"
+```
+
+
 ## Default Behavior
 If no SQL query is provided as an argument, the script defaults to using `SELECT * FROM clientInformation.clientInfoView;` to generate the report.
 

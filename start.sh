@@ -32,8 +32,8 @@ fi
 # Deploy the MarkLogic configurations (execute in silent mode)
 ./gradlew mlDeploy -q
 
-# Check for the correct number of arguments
-if [ "$#" -ne 1 ]; then
+# Check for the correct number of arguments is not less than 1
+if [ "$#" -lt 1 ]; then
     echo "Usage: $0 <path_to_csv_file> <optional_sql_query>"
     exit 1
 fi

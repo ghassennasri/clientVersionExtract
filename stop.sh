@@ -1,0 +1,2 @@
+./gradlew dockerStop
+./gradlew dockerRemoveContainer
