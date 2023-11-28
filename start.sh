@@ -80,4 +80,6 @@ curl --anyauth --user  admin:admin -i -X DELETE \
 rm report.csv
 # Print completion message
 echo "MarkLogic setup, data import, and report generation complete!"
-
+echo "generating distribution plot..."
+pip install -r requirements.txt
+python3 clientVersions.py

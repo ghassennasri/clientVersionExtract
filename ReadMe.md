@@ -40,7 +40,7 @@ The TDE configuration creates a view named `clientInfoView` in the `clientInform
 
 ## Usage
 Run the script by providing the path to the OpenSearch CSV report. Optionally, you can specify an SQL query to customize the report generation.
-
+A jpeg is also generated: software_distribution.jpg
 ```bash
 ./start.sh <path_to_csv_report> [<optional_sql_query>]
 ```
@@ -64,3 +64,6 @@ If no SQL query is provided as an argument, the script defaults to using `SELECT
 The script outputs a final report in CSV format. This report is based on the SQL view `clientInfoView` and can include all columns defined in the TDE configuration. To customize the report output, provide an alternative SQL query when running the script.
 
 Replace `start.sh` with the actual filename of your script. Place this `README.md` in the same directory as your script to serve as documentation for users.
+
+## Requirements
+- Python 3 (additional packages in requirements.txt will be installed)
